@@ -15,7 +15,7 @@ export const useStore = create((set) => ({
   increasePopulation: () => set((state) => ({ bears: state.bears + 1 })),
   signUpUser:async(name,email,password,avatar)=>{
     try {
-        const userData = await axios.post(`${api}/user/signup`,{name,email,password,avatar})
+        const userData = await axios.post(`/user/signup`,{name,email,password,avatar})
         
         set({user:userData.data})
         localStorage.setItem('token',userData.data.token)
@@ -27,7 +27,7 @@ export const useStore = create((set) => ({
   signInUser:async(email,password)=>{
     console.log(email,password);
     try {
-        const userData = await axios.post(`${api}/user/signin`,{email,password})
+        const userData = await axios.post(`/user/signin`,{email,password})
         
         set({user:userData.data})
         localStorage.setItem('token',userData.data.token)
@@ -37,7 +37,7 @@ export const useStore = create((set) => ({
   },
   getUser:async()=>{
     try {
-        const userData = await axios.get(`${api}/user/me`,{
+        const userData = await axios.get(`/user/me`,{
             headers:{
                 token:localStorage.getItem('token')
             }
@@ -52,7 +52,7 @@ export const useStore = create((set) => ({
   },
   createCategory:async(name)=>{
     try {
-        await axios.post(`${api}/category/create`,{name})
+        await axios.post(`/category/create`,{name})
         alert('Category created')
     } catch (error) {
         console.log(error);
@@ -60,7 +60,7 @@ export const useStore = create((set) => ({
   },
   allCategories:async()=>{
     try {
-        const category = await axios.get(`${api}/category`);
+        const category = await axios.get(`/category`);
       
        
         set({categories:category.data.categories})
@@ -74,7 +74,7 @@ export const useStore = create((set) => ({
   addToCart:async({product,productCount})=>{
     console.log(product);
     try {
-        const cartData = await axios.post(`${api}/cart/create`,{product,productCount},{
+        const cartData = await axios.post(`/cart/create`,{product,productCount},{
             headers:{
                 token:localStorage.getItem('token')
             }
@@ -87,7 +87,7 @@ export const useStore = create((set) => ({
   removeCart:async(cartId)=>{
     
     try {
-        const cart = await axios.delete(`${api}/cart/${cartId}`,{
+        const cart = await axios.delete(`/cart/${cartId}`,{
             headers:{
                 token:localStorage.getItem('token')
             }
@@ -100,7 +100,7 @@ export const useStore = create((set) => ({
 
   allCart:async()=>{
     try {
-        const cartData = await axios.get('http://localhost:5000/cart',{
+        const cartData = await axios.get('/cart',{
             headers:{
                 token:localStorage.getItem('token')
             }
@@ -112,7 +112,7 @@ export const useStore = create((set) => ({
   },
   allProduct:async()=>{
     try {
-        const productData =await axios.get(`${api}/product`)
+        const productData =await axios.get(`/product`)
         set({products:productData.data.products})
        
     } catch (error) {
@@ -122,7 +122,7 @@ export const useStore = create((set) => ({
   productById:async(id)=>{
     
     try {
-        const productData = await axios.get(`${api}/product/${id}`)
+        const productData = await axios.get(`/product/${id}`)
         set({product:productData.data.product})
        
     } catch (error) {
@@ -133,7 +133,7 @@ export const useStore = create((set) => ({
   createOrder:async({carts,total},shippingInfo)=>{
   console.log(carts,shippingInfo,total);
     try {
-        const order = await axios.post(`${api}/order`,{carts,total,shippingInfo},{
+        const order = await axios.post(`/order`,{carts,total,shippingInfo},{
             headers:{
                 token:localStorage.getItem('token')
             }
