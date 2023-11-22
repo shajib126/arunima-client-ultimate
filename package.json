@@ -1,8 +1,8 @@
 {
   "name": "arunima-client",
   "version": "0.1.0",
-  "private": true,
-  "proxy":"arunima-server-ultimate.onrender.com",
+  "private": false,
+  "port":"arunima-server-ultimate.onrender.com",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

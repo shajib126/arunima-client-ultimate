@@ -15,12 +15,12 @@ const page = () => {
 const [previewImages, setPreviewImages] = useState([]);
   const [images,setImages] = useState([])
 
-  console.log(previewImages);
+  
   const handleSubmit = async(e)=>{
-    console.log(images,name,description,price,category);
+    
     e.preventDefault()
 
-    const product = await axios.post('/product/create',{name,price,description,category,inStock,images:previewImages})
+    const product = await axios.post(`https://arunima-server-ultimate.onrender.com/product/create`,{name,price,description,category,inStock,images:previewImages})
     if(product){
       alert('Product Created')
     }else{
@@ -44,8 +44,9 @@ const [previewImages, setPreviewImages] = useState([]);
   }
   useEffect(()=>{
     allCategories()
+    
   },[])
-  console.log(categories);
+  
   return (
     <Layout>
       <div className="border-dashed border-2 rounded-xl p-4 w-[80%]">
